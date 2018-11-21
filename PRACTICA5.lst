@@ -400,3 +400,681 @@ SQL> COMMIT WORK
 Commit complete.
 
 SQL> SPOOL OFF
+SQL> SPOOL OFF
+SQL> SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE CAS=8 AND
+  4  
+SQL> SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE CAS=8 AND T='GII';
+
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+JOSE MANUEL                                                                     
+
+SQL> SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+  3  WHERE D='MATEMATICA FUNDAMENTAL';
+
+P                                                                               
+------------------------------------------------------------                    
+IVAN                                                                            
+
+SQL> SELECT DISTINCT(P)
+  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+  3  WHERE
+  4  
+SQL> SELECT DISTINCT(A)
+  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+  3  WHERE
+  4  SELECT DISTINCT(A)
+  5  
+SQL> SELECT DISTINCT(A)
+  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+  3  WHERE DNI=1010;
+
+A                                                                               
+--------------------------------------------------                              
+GESTION DE RIESGOS                                                              
+INTELIGENCIA ARTIFICIAL                                                         
+
+SQL> SELECT DISTINCT(A)
+  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE NATURAL JOIN PROFESOR
+  3  WHERE P='DAVID'
+  4  ;
+
+A                                                                               
+--------------------------------------------------                              
+GESTION DE RIESGOS                                                              
+INTELIGENCIA ARTIFICIAL                                                         
+
+SQL> SELECT DISTINCT(AR)
+  2  FROM AREA NATURAL JOIN DEPARTAMENTO
+  3  WHERE D='ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION';
+
+AR                                                                              
+------------------------------------------------------------                    
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                            
+ESTADISTICA E INVESTIGACION OPERATIVA                                           
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+
+SQL> SELECT DISTINCT(AR)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL;
+SELECT DISTINCT(AR)
+                *
+ERROR at line 1:
+ORA-00904: "AR": invalid identifier 
+
+
+SQL> SELECT DISTINCT(AR)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE FF IS NULL;
+SELECT DISTINCT(AR)
+                *
+ERROR at line 1:
+ORA-00904: "AR": invalid identifier 
+
+
+SQL> SELECT DISTINCT(A)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE FF IS NULL AND CAT='CU';
+
+A                                                                               
+--------------------------------------------------                              
+OPTIMIZACION                                                                    
+ALMACENES DE DATOS                                                              
+
+SQL> SELECT DISTINCT(A)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  
+SQL> SELECT DISTINCT(A)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE CAT='CU';
+
+A                                                                               
+--------------------------------------------------                              
+OPTIMIZACION                                                                    
+ALMACENES DE DATOS                                                              
+
+SQL> SELECT DISTINCT(A)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  GROUP BY CAS HAVING ONLY CAT='CU';
+GROUP BY CAS HAVING ONLY CAT='CU'
+                         *
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> SELECT DISTINCT(A)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  GROUP BY CAS HAVING CAT='CU';
+GROUP BY CAS HAVING CAT='CU'
+                    *
+ERROR at line 3:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT DISTINCT(A)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  GROUP BY CAS;
+SELECT DISTINCT(A)
+                *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT A
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  GROUP BY CAS;
+SELECT A
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  GROUP BY CAS;
+SELECT A
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT A
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  GROUP BY A AND AS;
+GROUP BY A AND AS
+           *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT A
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  GROUP BY A AND CAS;
+GROUP BY A AND CAS
+           *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT A
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  GROUP BY A, CAS;
+
+A                                                                               
+--------------------------------------------------                              
+MINERIA DE DATOS                                                                
+ALGEBRA                                                                         
+CALCULO                                                                         
+OPTIMIZACION                                                                    
+INTELIGENCIA ARTIFICIAL                                                         
+ASTRONOMIA                                                                      
+GESTION DE RIESGOS                                                              
+BASES DE DATOS                                                                  
+ENSENANZA DE LA MATEMATICA                                                      
+ANALISIS COMPLEJO                                                               
+ALMACENES DE DATOS                                                              
+
+A                                                                               
+--------------------------------------------------                              
+INFORMATICA BASICA                                                              
+
+12 rows selected.
+
+SQL> SELECT A
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  GROUP BY A, CAT
+  4  HAVING CAT='CU';
+
+A                                                                               
+--------------------------------------------------                              
+OPTIMIZACION                                                                    
+ALMACENES DE DATOS                                                              
+
+SQL> SELECT A
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  GROUP BY A, CAT
+  4  HAVING CAT ONLY 'CU';
+HAVING CAT ONLY 'CU'
+           *
+ERROR at line 4:
+ORA-00920: invalid relational operator 
+
+
+SQL> REM CONSULTA 17
+SQL> SELECT A
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  WHERE
+  4  
+SQL> SELECT DISTINCT(A)
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  WHERE AR IS ('LENGUAJES Y SISTEMAS INFORMATICOS', 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL')
+  4  ;
+WHERE AR IS ('LENGUAJES Y SISTEMAS INFORMATICOS', 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL')
+            *
+ERROR at line 3:
+ORA-00908: missing NULL keyword 
+
+
+SQL> SELECT DISTINCT(A)
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  WHERE AR=('LENGUAJES Y SISTEMAS INFORMATICOS', 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL');
+WHERE AR=('LENGUAJES Y SISTEMAS INFORMATICOS', 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL')
+        *
+ERROR at line 3:
+ORA-01797: this operator must be followed by ANY or ALL 
+
+
+SQL> WHERE AR ANY ('LENGUAJES Y SISTEMAS INFORMATICOS', 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL');
+SP2-0734: unknown command beginning "WHERE AR A..." - rest of line ignored.
+SQL> SELECT DISTINCT(A)
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  WHERE AR ANY ('LENGUAJES Y SISTEMAS INFORMATICOS', 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL');
+WHERE AR ANY ('LENGUAJES Y SISTEMAS INFORMATICOS', 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL')
+         *
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> SELECT DISTINCT(A)
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  WHERE AR IN ('LENGUAJES Y SISTEMAS INFORMATICOS', 'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL');
+
+A                                                                               
+--------------------------------------------------                              
+INFORMATICA BASICA                                                              
+BASES DE DATOS                                                                  
+GESTION DE RIESGOS                                                              
+INTELIGENCIA ARTIFICIAL                                                         
+MINERIA DE DATOS                                                                
+ALMACENES DE DATOS                                                              
+
+6 rows selected.
+
+SQL> SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE FF IS NULL AND T IN ('GII', 'MII');
+
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+PEDRO                                                                           
+SOLEDAD                                                                         
+CARLOS                                                                          
+IVAN                                                                            
+DAVID                                                                           
+MARIA                                                                           
+JOSE MANUEL                                                                     
+ANGELA                                                                          
+
+9 rows selected.
+
+SQL> SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  GROUP BY P
+  4  HAVING
+  5  
+SQL> SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE FF IS NULL AND T='GII'
+  4  INTERSECT
+  5  SELECT DISTINCT(P)
+  6  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  7  WHERE FF IS NULL AND T='MII';
+
+no rows selected
+
+SQL> (SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE FF IS NULL AND T='GII')
+  4  INTERSECT
+  5  (SELECT DISTINCT(P)
+  6  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  7  WHERE FF IS NULL AND T='MII');
+
+no rows selected
+
+SQL> (SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE FF IS NULL AND T='GII');
+
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+PEDRO                                                                           
+IVAN                                                                            
+DAVID                                                                           
+MARIA                                                                           
+JOSE MANUEL                                                                     
+ANGELA                                                                          
+
+7 rows selected.
+
+SQL> (SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE FF IS NULL AND T='GII')
+  4  UNION
+  5  (SELECT DISTINCT(P)
+  6  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  7  WHERE FF IS NULL AND T='MII');
+
+P                                                                               
+------------------------------------------------------------                    
+ANGELA                                                                          
+CARLOS                                                                          
+DAVID                                                                           
+IVAN                                                                            
+JOSE MANUEL                                                                     
+JUAN                                                                            
+MARIA                                                                           
+PEDRO                                                                           
+SOLEDAD                                                                         
+
+9 rows selected.
+
+SQL> (SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  3  WHERE FF IS NULL AND T='GII')
+  4  NATURAL JOIN
+  5  (SELECT DISTINCT(P)
+  6  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE NATURAL JOIN ASIGNATURA
+  7  WHERE FF IS NULL AND T='MII');
+NATURAL JOIN
+*
+ERROR at line 4:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> REM EN,VERDAD,HACE,RATO,QUE,YA,ESTABA,BIEN,NO,ROWS,SELECTED
+SQL> SELECT DISTINCT(P)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS
+  4  
+SQL> SELECT DISTINCT(P)
+  2  FROM PROFESOR
+  3  MINUS
+  4  SELECT DISTINCT(P)
+  5  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  6  WHERE FF IS NULL;
+
+P                                                                               
+------------------------------------------------------------                    
+CARMEN                                                                          
+
+SQL> SELECT DISTINCT(A)
+  2  FROM ASIGNATURA
+  3  WHERE T='GII';
+
+A                                                                               
+--------------------------------------------------                              
+ALGEBRA                                                                         
+BASES DE DATOS                                                                  
+INFORMATICA BASICA                                                              
+OPTIMIZACION                                                                    
+CALCULO                                                                         
+GESTION DE RIESGOS                                                              
+INTELIGENCIA ARTIFICIAL                                                         
+
+7 rows selected.
+
+SQL> SELECT AR, A
+  2  FROM ASIGNATURA NATURAL JOIN AREA
+  3  ;
+
+AR                                                                              
+------------------------------------------------------------                    
+A                                                                               
+--------------------------------------------------                              
+ALGEBRA                                                                         
+ALGEBRA                                                                         
+                                                                                
+ANALISIS MATEMATICO                                                             
+ANALISIS COMPLEJO                                                               
+                                                                                
+ASTRONOMIA Y ASTROFISICA                                                        
+ASTRONOMIA                                                                      
+                                                                                
+
+AR                                                                              
+------------------------------------------------------------                    
+A                                                                               
+--------------------------------------------------                              
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                            
+GESTION DE RIESGOS                                                              
+                                                                                
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                            
+INTELIGENCIA ARTIFICIAL                                                         
+                                                                                
+DIDACTICA DE LA MATEMATICA                                                      
+ENSENANZA DE LA MATEMATICA                                                      
+                                                                                
+
+AR                                                                              
+------------------------------------------------------------                    
+A                                                                               
+--------------------------------------------------                              
+ESTADISTICA E INVESTIGACION OPERATIVA                                           
+OPTIMIZACION                                                                    
+                                                                                
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+INFORMATICA BASICA                                                              
+                                                                                
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+MINERIA DE DATOS                                                                
+                                                                                
+
+AR                                                                              
+------------------------------------------------------------                    
+A                                                                               
+--------------------------------------------------                              
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+ALMACENES DE DATOS                                                              
+                                                                                
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+BASES DE DATOS                                                                  
+                                                                                
+MATEMATICA APLICADA                                                             
+CALCULO                                                                         
+                                                                                
+
+12 rows selected.
+
+SQL> SELECT DISTINCT(AR, A)
+  2  FROM ASIGNATURA NATURAL JOIN AREA;
+SELECT DISTINCT(AR, A)
+                  *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT DISTINCT(AR), A
+  2  FROM ASIGNATURA NATURAL JOIN AREA;
+
+AR                                                                              
+------------------------------------------------------------                    
+A                                                                               
+--------------------------------------------------                              
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+BASES DE DATOS                                                                  
+                                                                                
+MATEMATICA APLICADA                                                             
+CALCULO                                                                         
+                                                                                
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                            
+GESTION DE RIESGOS                                                              
+                                                                                
+
+AR                                                                              
+------------------------------------------------------------                    
+A                                                                               
+--------------------------------------------------                              
+ALGEBRA                                                                         
+ALGEBRA                                                                         
+                                                                                
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                            
+INTELIGENCIA ARTIFICIAL                                                         
+                                                                                
+ESTADISTICA E INVESTIGACION OPERATIVA                                           
+OPTIMIZACION                                                                    
+                                                                                
+
+AR                                                                              
+------------------------------------------------------------                    
+A                                                                               
+--------------------------------------------------                              
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+MINERIA DE DATOS                                                                
+                                                                                
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+ALMACENES DE DATOS                                                              
+                                                                                
+ANALISIS MATEMATICO                                                             
+ANALISIS COMPLEJO                                                               
+                                                                                
+
+AR                                                                              
+------------------------------------------------------------                    
+A                                                                               
+--------------------------------------------------                              
+DIDACTICA DE LA MATEMATICA                                                      
+ENSENANZA DE LA MATEMATICA                                                      
+                                                                                
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+INFORMATICA BASICA                                                              
+                                                                                
+ASTRONOMIA Y ASTROFISICA                                                        
+ASTRONOMIA                                                                      
+                                                                                
+
+12 rows selected.
+
+SQL> SELECT DISTINCT(AR), A
+  2  
+SQL> 
+SQL> SELECT DISTINCT(D), AR
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA;
+
+D                                                                               
+------------------------------------------------------------                    
+AR                                                                              
+------------------------------------------------------------                    
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+                                                                                
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+ESTADISTICA E INVESTIGACION OPERATIVA                                           
+                                                                                
+ANALISIS MATEMTICO                                                              
+MATEMATICA APLICADA                                                             
+                                                                                
+
+D                                                                               
+------------------------------------------------------------                    
+AR                                                                              
+------------------------------------------------------------                    
+ASTROFISICA                                                                     
+ASTRONOMIA Y ASTROFISICA                                                        
+                                                                                
+MATEMATICA FUNDAMENTAL                                                          
+ALGEBRA                                                                         
+                                                                                
+ANALISIS MATEMTICO                                                              
+DIDACTICA DE LA MATEMATICA                                                      
+                                                                                
+
+D                                                                               
+------------------------------------------------------------                    
+AR                                                                              
+------------------------------------------------------------                    
+ANALISIS MATEMTICO                                                              
+ANALISIS MATEMATICO                                                             
+                                                                                
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                            
+                                                                                
+
+8 rows selected.
+
+SQL> SELECT DISTINCT(D), AR
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA
+  3  ORDER BY D, AR;
+
+D                                                                               
+------------------------------------------------------------                    
+AR                                                                              
+------------------------------------------------------------                    
+ANALISIS MATEMTICO                                                              
+ANALISIS MATEMATICO                                                             
+                                                                                
+ANALISIS MATEMTICO                                                              
+DIDACTICA DE LA MATEMATICA                                                      
+                                                                                
+ANALISIS MATEMTICO                                                              
+MATEMATICA APLICADA                                                             
+                                                                                
+
+D                                                                               
+------------------------------------------------------------                    
+AR                                                                              
+------------------------------------------------------------                    
+ASTROFISICA                                                                     
+ASTRONOMIA Y ASTROFISICA                                                        
+                                                                                
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                            
+                                                                                
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+ESTADISTICA E INVESTIGACION OPERATIVA                                           
+                                                                                
+
+D                                                                               
+------------------------------------------------------------                    
+AR                                                                              
+------------------------------------------------------------                    
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+LENGUAJES Y SISTEMAS INFORMATICOS                                               
+                                                                                
+MATEMATICA FUNDAMENTAL                                                          
+ALGEBRA                                                                         
+                                                                                
+
+8 rows selected.
+
+SQL> SELECT *
+  2  FROM DEPARTAMENTO;
+
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMTICO                                                   
+         2 ASTROFISICA                                                          
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                   
+         4 MATEMATICA FUNDAMENTAL                                               
+
+SQL> SELECT DISTINCT(D), P
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  ORDER BY D, P;
+
+D                                                                               
+------------------------------------------------------------                    
+P                                                                               
+------------------------------------------------------------                    
+ANALISIS MATEMTICO                                                              
+ANGELA                                                                          
+                                                                                
+ANALISIS MATEMTICO                                                              
+FRANCISCO                                                                       
+                                                                                
+ANALISIS MATEMTICO                                                              
+MARIO                                                                           
+                                                                                
+
+D                                                                               
+------------------------------------------------------------                    
+P                                                                               
+------------------------------------------------------------                    
+ASTROFISICA                                                                     
+CARMEN                                                                          
+                                                                                
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+CARLOS                                                                          
+                                                                                
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+DAVID                                                                           
+                                                                                
+
+D                                                                               
+------------------------------------------------------------                    
+P                                                                               
+------------------------------------------------------------                    
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+JOSE MANUEL                                                                     
+                                                                                
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+JUAN                                                                            
+                                                                                
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+MARIA                                                                           
+                                                                                
+
+D                                                                               
+------------------------------------------------------------                    
+P                                                                               
+------------------------------------------------------------                    
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+PEDRO                                                                           
+                                                                                
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                              
+SOLEDAD                                                                         
+                                                                                
+MATEMATICA FUNDAMENTAL                                                          
+IVAN                                                                            
+                                                                                
+
+12 rows selected.
+
+SQL> EXIT
