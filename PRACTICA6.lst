@@ -1,0 +1,102 @@
+SQL> SELECT TO_CHAR(SYSDATE, 'HH:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                                                                                              
+--------                                                                                                                                              
+12:52:38                                                                                                                                              
+
+SQL> SELECT SYSDATE
+  2  FROM DUAL;
+
+SYSDATE                                                                                                                                               
+---------                                                                                                                                             
+29-NOV-18                                                                                                                                             
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DOW:DOM:YY')
+  2  FROM DUAL;
+SELECT TO_CHAR(SYSDATE, 'DOW:DOM:YY')
+                        *
+ERROR at line 1:
+ORA-01821: date format not recognized 
+
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DAY, DD/MM/YYYY')
+  2  FROM DUAL;
+
+TO_CHAR(SYSDATE,'DAY,DD/MM/YYYY')                                                                                                                     
+------------------------------------------------                                                                                                      
+THURSDAY , 29/11/2018                                                                                                                                 
+
+SQL> SPOOL
+currently spooling to PRACTICA6.lst
+SQL> SELECT TO_CHAR(SYSDATE, 'HH, MI, SS')
+  2  FROM DUAL;
+
+TO_CHAR(SY                                                                                                                                            
+----------                                                                                                                                            
+01, 01, 07                                                                                                                                            
+
+SQL> SELECT TO_CHAR(SYSDATE, 'HH:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                                                                                              
+--------                                                                                                                                              
+01:01:21                                                                                                                                              
+
+SQL> SELECT TO_CHAR(SYSDATE, 'HO:MI:SS')
+  2  FROM DUAL;
+SELECT TO_CHAR(SYSDATE, 'HO:MI:SS')
+                        *
+ERROR at line 1:
+ORA-01821: date format not recognized 
+
+
+SQL> SELECT TO_CHAR(SYSDATE, '24-12-HH:MI:SS')
+  2  FROM DUAL;
+SELECT TO_CHAR(SYSDATE, '24-12-HH:MI:SS')
+                        *
+ERROR at line 1:
+ORA-01821: date format not recognized 
+
+
+SQL> SELECT TO_CHAR(GETDATE, 24)
+  2  FROM DUAL;
+SELECT TO_CHAR(GETDATE, 24)
+               *
+ERROR at line 1:
+ORA-00904: "GETDATE": invalid identifier 
+
+
+SQL> SELECT TO_CHAR(SYSDATE, 24)
+  2  FROM DUAL;
+SELECT TO_CHAR(SYSDATE, 24)
+                        *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected DATE got NUMBER 
+
+
+SQL> SELECT TO_CHAR(SYSDATE, '24HH')
+  2  FROM DUAL;
+SELECT TO_CHAR(SYSDATE, '24HH')
+                        *
+ERROR at line 1:
+ORA-01821: date format not recognized 
+
+
+SQL> SELECT TO_CHAR(SYSDATE, 'HH24:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                                                                                              
+--------                                                                                                                                              
+13:08:32                                                                                                                                              
+
+SQL> HOST ls
+
+SQL> SPOOL OFF
+SQL> SPOOL
+currently spooling to PRACTICA6.lst
+SQL> SPOOL OFF
+SQL> SPOOL OFF
+SQL> SPOOL
+currently spooling to PRACTICA6.lst
+SQL> SPOOL OFF
